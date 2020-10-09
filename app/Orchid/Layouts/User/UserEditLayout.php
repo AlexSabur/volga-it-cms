@@ -29,6 +29,11 @@ class UserEditLayout extends Rows
                 ->required()
                 ->title(__('Email'))
                 ->placeholder(__('Email')),
+
+            Input::make('user.balance')
+                ->required()
+                ->title(__('Balance'))
+                ->placeholder(__('Balance')),
         ];
     }
 }

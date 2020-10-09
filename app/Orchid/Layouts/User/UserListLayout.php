@@ -48,6 +48,14 @@ class UserListLayout extends Table
                         ]);
                 }),
 
+            TD::set('balance', __('Balance'))
+                ->sort()
+                ->cantHide()
+                ->filter(TD::FILTER_NUMERIC)
+                ->render(function (User $user) {
+                    return "$user->balance ₽";
+                }),
+
             TD::set('updated_at', __('Last edit'))
                 ->sort()
                 ->render(function (User $user) {
