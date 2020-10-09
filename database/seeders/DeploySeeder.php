@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Actions\Fortify\CreateNewUser;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DeploySeeder extends Seeder
 {
@@ -15,21 +16,27 @@ class DeploySeeder extends Seeder
      */
     public function run()
     {
-        /** @var CreateNewUser $createNewUser */
-        $createNewUser = app(CreateNewUser::class);
-
         User::createAdmin('Admin', 'admin@admin.com', 'password');
 
         User::first()->update([
             'balance' => 2000
         ]);
 
-        $createNewUser->create([
+        User::forceCreate([
             'name' => 'Test',
             'email' => 'test@test.test',
-            'password' => 'password',
+            'password' => Hash::make('password'),
+            'balance' => 2000,
         ]);
 
-        
+        $offer = Offer::create([
+            'title' => 'Худи 1',
+            'price' => 360,
+        ]);
+
+        $offer = Offer::create([
+            'title' => 'Худи 2',
+            'price' => 500,
+        ]);
     }
 }
