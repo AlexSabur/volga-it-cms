@@ -9,6 +9,10 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\OfferEditScreen;
+use App\Orchid\Screens\OfferListScreen;
+use App\Orchid\Screens\Order\OrderEditScreen;
+use App\Orchid\Screens\Order\OrderListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -104,3 +108,15 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+
+Route::screen('offers/edit/{offer?}', OfferEditScreen::class)
+    ->name('platform.offer.edit');
+
+Route::screen('offers', OfferListScreen::class)
+    ->name('platform.offer.list');
+
+Route::screen('orders/edit/{offer?}', OrderEditScreen::class)
+    ->name('platform.order.edit');
+
+Route::screen('orders', OrderListScreen::class)
+    ->name('platform.order.list');

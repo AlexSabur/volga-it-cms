@@ -2,6 +2,8 @@
 
 namespace App\Orchid;
 
+use App\Enums\OrderStatus;
+use App\Models\Order;
 use Laravel\Scout\Searchable;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
@@ -25,6 +27,19 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function registerMainMenu(): array
     {
+        return [
+            ItemMenu::label('Заявки')
+                // ->icon('monitor')
+                ->route('platform.order.list')
+                ->badge(function () {
+                    return Order::whereStatus(OrderStatus::Treatment)->count();
+                }),
+
+            ItemMenu::label('Товары')
+                // ->icon('monitor')
+                ->route('platform.offer.list'),
+        ];
+
         return [
             ItemMenu::label('Example screen')
                 ->icon('monitor')
