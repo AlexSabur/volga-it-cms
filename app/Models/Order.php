@@ -14,7 +14,7 @@ class Order extends Model
     use HasFactory;
     use AsSource;
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'status' => OrderStatus::class

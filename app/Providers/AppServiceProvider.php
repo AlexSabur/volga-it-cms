@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Enums\OrderStatus;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Inertia::share('orderStatuses', function () {
+            return OrderStatus::asSelectArray();
+        });
     }
 }

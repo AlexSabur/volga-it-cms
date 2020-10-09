@@ -28,7 +28,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            ItemMenu::label('Заявки')
+            ItemMenu::label('Заказы')
                 // ->icon('monitor')
                 ->route('platform.order.list')
                 ->badge(function () {

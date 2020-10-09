@@ -30,7 +30,8 @@ class OrderListScreen extends Screen
     public function query(): array
     {
         return [
-            'orders' => Order::paginate()
+            'orders' => Order::withCount('offers')
+                ->paginate()
         ];
     }
 

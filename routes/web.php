@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::middleware('auth:guest')->redirect('/', '/register');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/', [OfferController::class, 'index'])->name('offers');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::post('/orders', [OrderController::class, 'create'])->name('orders.create');
+    Route::get('/orders/{order}', [OrderController::class, 'view'])->name('orders.view');
+});

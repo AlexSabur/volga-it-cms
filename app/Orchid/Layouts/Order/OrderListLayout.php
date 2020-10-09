@@ -37,7 +37,9 @@ class OrderListLayout extends Table
 
             TD::set('price', 'цена')->render(function (Order $order) {
                 return "$order->price ₽";
-            }),,
+            }),
+
+            TD::set('offers_count', 'Количество товара'),
 
             // TD::set('price' , 'цена'),
 

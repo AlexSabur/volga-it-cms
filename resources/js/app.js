@@ -5,6 +5,11 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
+import SortedTablePlugin from "vue-sorted-table";
+ 
+Vue.use(SortedTablePlugin);
+
+import store from './store';
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
@@ -14,6 +19,7 @@ Vue.use(PortalVue);
 const app = document.getElementById('app');
 
 new Vue({
+    store,
     render: (h) =>
         h(InertiaApp, {
             props: {
