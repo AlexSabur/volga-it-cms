@@ -37,4 +37,26 @@ class Order extends Model
             'count'
         ]);
     }
+
+    protected static function booted()
+    {
+        static::saving(function (Order $order) {
+            if ($order->wasChanged('status')) {
+                switch (true) {
+                    case $order->status->is(OrderStatus::Treatment):
+                        # code...
+                        break;
+                    case $order->status->is(OrderStatus::Sent):
+                        $order->sent_at = now();
+                        break;
+                    case $order->status->is(OrderStatus::Received):
+                        $order->received_in = now();
+                        break;
+                    case $order->status->is(OrderStatus::Canceled):
+                        # code...
+                        break;
+                }
+            };
+        });
+    }
 }

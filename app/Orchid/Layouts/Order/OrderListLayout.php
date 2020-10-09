@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\Order;
 use App\Models\Order;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -41,7 +42,15 @@ class OrderListLayout extends Table
 
             TD::set('offers_count', 'Количество товара'),
 
-            // TD::set('price' , 'цена'),
+            TD::set('status' , 'Статус')->render(function (Order $order) {
+                return ModalToggle::make($order->status->description)
+                    ->modal('oneAsyncModal')
+                    ->modalTitle("Изменение статуса: {$order->id}")
+                    ->method('saveOrder')
+                    ->asyncParameters([
+                        'order' => $order->id,
+                    ]);
+            }),
 
             TD::set('id', 'ID')
                 ->align(TD::ALIGN_CENTER)
